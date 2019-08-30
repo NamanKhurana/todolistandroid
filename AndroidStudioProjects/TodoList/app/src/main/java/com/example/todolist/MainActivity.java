@@ -17,7 +17,6 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AlertDialog.Builder builder;
     private AlertDialog dialog;
     private Button saveButton;
     private EditText babyItem;
@@ -32,14 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        saveButton = findViewById(R.id.saveButton);
-//        saveButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                saveItem();
-//            }
-//        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -62,13 +53,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createPopupDialog() {
-        builder = new AlertDialog.Builder(this);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         View view = getLayoutInflater().inflate(R.layout.popup,null);
+
         babyItem = view.findViewById(R.id.babyItem);
         itemQuantity = view.findViewById(R.id.itemQuantity);
         itemColor = view.findViewById(R.id.itemColor);
         itemSize = view.findViewById(R.id.itemSize);
+
+        /**
+         * Silly Mistake
+         */
+
+        saveButton = view.findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveItem();
+            }
+        });
 
         builder.setView(view);
         dialog = builder.create(); //creating our dialog object
